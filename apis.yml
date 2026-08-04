@@ -1,17 +1,73 @@
 aid: digits-financial
 name: Digits
-description: 'Digits is a company surfaced via the API Evangelist harvest backlog (source: secondary-market)
-  and added to the network as a stub for full-pipeline profiling.'
+description: >-
+  Digits Financial, Inc. is an AI-native accounting software company founded in
+  2018 and headquartered in San Francisco, California, by Jeff Seibert and Wayne
+  Chang. It builds what it calls the world's first Agentic (Autonomous) General
+  Ledger — a suite of custom-trained models and agents that auto-book the
+  majority of business transactions in real time to keep books continuously
+  closed rather than reconciled monthly. The platform covers automated
+  bookkeeping and categorization, vendor research and enrichment, reconciliation,
+  financial reporting and dashboards, bill pay, invoicing, automated accrual
+  schedules, and an agentic month-end close, and it is sold to small businesses,
+  startups, and the accounting firms that serve them. Its developer surface is
+  the Digits Connect API — a REST API over the general ledger authenticated with
+  OAuth 2.0, documented at developer.digits.com and served from
+  connect.digits.com — alongside a webhooks surface and a hosted MCP server that
+  exposes read-only ledger access to AI tools such as Claude and ChatGPT. Digits
+  has raised roughly $97M from investors including Benchmark, GV, SoftBank,
+  Bessemer Venture Partners, G Squared, and 20VC, and its shares trade on
+  secondary marketplaces such as Forge Global ahead of any public listing.
 url: https://raw.githubusercontent.com/api-evangelist/digits-financial/refs/heads/main/apis.yml
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/digits-com.png
 x-type: company
 x-source: harvest:secondary-market
 x-tier: stub
-x-tier-reason: harvest
+x-tier-reason: duplicate-pending-merge
+x-duplicate-of: digits-com
+x-duplicate-candidates:
+- digits-com
+- digits
+x-duplicate-note: >-
+  This repo was created from the secondary-market harvest backlog against the
+  Forge Global private-stock listing at forgeglobal.com/digits-financial_stock/.
+  Verified during the 2026-08-04 enrichment pass: "Digits Financial" is the legal
+  entity name of Digits (digits.com), the San Francisco AI-native accounting
+  company — the SAME company already profiled TWICE in the network, at
+  all/digits-com (10 API entries, 8 refined OpenAPIs harvested from the Digits
+  Connect API, plans, rate-limits, finops, agentic-access, collections, blogs,
+  Kin Score history) and again at all/digits (3 API entries, a rich artifact tree
+  spanning asyncapi, conventions, sandbox, skills, llms, well-known, lifecycle,
+  errors and data-model). Both are LIVE on apis.io as separate providers. No
+  parallel artifact tree was generated here on purpose: a third profile would
+  split one company across three apis.io pages and three Kin Scores. Per the
+  duplicate-provider-retirement procedure the survivor should be chosen by depth
+  and slug convention (slug = domain), which points at digits-com; this slug —
+  and, separately, all/digits — should be merged into it and tombstoned in
+  api-search/network/_data/retired.yml rather than enriched.
+x-scaffold-warning: >-
+  Flagged for the scaffold-fabrication sweep, not for this repo but for
+  all/digits. That repo's three "APIs" — "Digits Llms.txt API", "Digits
+  Sitemap.xml API" and "Digits .well Known API" — are derived from
+  https://digits.com/openapi.json, a 3.6KB marketing-site document whose only
+  paths are /llms.txt, /sitemap.xml, /.well-known/mcp.json and
+  /.well-known/mcp/server.json. Those are static site files, not an API product.
+  On that basis all/digits scores composite 57.6 (strong) while all/digits-com,
+  which holds the REAL Digits Connect API contracts, scores 37.0 (thin) — the
+  scores are effectively inverted, matching the known Cisco fabricated-contracts
+  pattern. Harvest the real spec before reconciling the two.
 specificationVersion: '0.20'
 created: '2026-08-04'
 modified: '2026-08-04'
 tags:
 - Company
+- Accounting
+- Bookkeeping
+- General Ledger
+- Financial Reporting
+- FinTech
+- Artificial Intelligence
+- Secondary Market
 apis: []
 maintainers:
 - FN: Kin Lane
@@ -20,4 +76,49 @@ maintainers:
   email: info@apis.io
 common:
 - type: Website
+  url: https://digits.com/
+- type: SecondaryMarket
   url: https://forgeglobal.com/digits-financial_stock/
+- type: LinkedIn
+  url: https://www.linkedin.com/company/digits-financial
+x-enrichment:
+  date: '2026-08-04'
+  status: minimal
+  artifacts_added: 0
+  pass: local-v1
+x-discovery:
+  date: '2026-08-04'
+  method: probed
+  note: >-
+    STEP 0b contract discovery run against digits.com, connect.digits.com,
+    developer.digits.com, my.digits.com and mcp.digits.com. Real surfaces DO
+    exist and are recorded below as evidence, but they were deliberately NOT
+    saved into this repo — they belong to the surviving profile, not to a
+    duplicate stub. my.digits.com is a single-page-app catch-all that answers
+    HTTP 200 with a byte-identical 55KB HTML shell for every path including
+    /.well-known/agent-card.json and /.well-known/agent.json, so those 200s were
+    correctly rejected as false positives per the pipeline contract. No A2A
+    agent card exists on any Digits host. mcp.digits.com does not resolve.
+  key_finding: >-
+    developer.digits.com publishes an RFC 9727 /.well-known/api-catalog linkset
+    pointing at three live OpenAPI documents. The primary one —
+    https://developer.digits.com/openapi/openapi.yaml — is OpenAPI 3.0.3 "Digits
+    Connect API" v1.0, 182KB, 73 paths / 88 operations, servers
+    https://connect.digits.com, bearerAuth. The copy held by the survivor repo
+    (all/digits-com/openapi/_original/digits-com-openapi.yml) is 17.7KB with 23
+    paths / 24 operations — roughly a quarter of the live surface. The survivor's
+    spec is stale and should be re-harvested from the api-catalog.
+  results:
+  - {host: digits.com, agent_card: none, security_txt: 200, llms_txt: 200, openapi: 200-marketing-site-only, mcp_server_json: 200, api_catalog: 404}
+  - {host: developer.digits.com, agent_card: none, security_txt: 404, llms_txt: 200, openapi: 404, api_catalog: 200-rfc9727-linkset}
+  - {host: connect.digits.com, agent_card: none, security_txt: 404, llms_txt: 404, openapi: 404, api_catalog: 404, note: all-paths-404}
+  - {host: my.digits.com, agent_card: none, note: spa-catch-all-200-html-rejected}
+  - {host: mcp.digits.com, note: dns-does-not-resolve}
+  unharvested_for_survivor:
+  - {url: 'https://developer.digits.com/.well-known/api-catalog', status: 200, type: APICatalog, note: 'RFC 9727 linkset, 3 service-desc entries'}
+  - {url: 'https://developer.digits.com/openapi/openapi.yaml', status: 200, type: OpenAPI, note: 'Digits Connect API 3.0.3 — 73 paths / 88 ops'}
+  - {url: 'https://developer.digits.com/openapi/openapi-oauth.yaml', status: 200, type: OpenAPI, note: 'OAuth Authorization — 1 op, OAuth_Authorize'}
+  - {url: 'https://developer.digits.com/openapi/openapi-webhooks.yaml', status: 200, type: OpenAPI, note: 'Digits Webhooks — receiveWebhookEvent'}
+  - {url: 'https://developer.digits.com/llms.txt', status: 200, type: LLMsTxt, note: '25.7KB Connect API docs index'}
+  - {url: 'https://digits.com/.well-known/mcp/server.json', status: 200, type: MCPServer, note: 'MCP server.json, name com.digits/marketing-site'}
+  - {url: 'https://digits.com/.well-known/security.txt', status: 200, type: SecurityTxt, note: 'Contact security@digits.com'}
