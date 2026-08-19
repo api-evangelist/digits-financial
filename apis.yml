@@ -56,7 +56,7 @@ x-scaffold-warning: >-
   which holds the REAL Digits Connect API contracts, scores 37.0 (thin) — the
   scores are effectively inverted, matching the known Cisco fabricated-contracts
   pattern. Harvest the real spec before reconciling the two.
-specificationVersion: '0.20'
+specificationVersion: '0.23'
 created: '2026-08-04'
 modified: '2026-08-04'
 tags:
