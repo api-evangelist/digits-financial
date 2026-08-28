@@ -19,6 +19,17 @@ description: >-
   Bessemer Venture Partners, G Squared, and 20VC, and its shares trade on
   secondary marketplaces such as Forge Global ahead of any public listing.
 url: https://raw.githubusercontent.com/api-evangelist/digits-financial/refs/heads/main/apis.yml
+deliveryModel:
+  model: unknown
+  open_source: false
+  commercial: false
+  callable_host: false
+  label: Delivery model not determined — needs a product licence on record
+  confidence: low
+  source:
+  - none
+  generated: '2026-08-28'
+  method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/digits-com.png
 x-type: company
 x-source: harvest:secondary-market
